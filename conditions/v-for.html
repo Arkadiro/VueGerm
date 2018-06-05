@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VueApp</title>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h3>{{title}}</h3>
+        <p>{{p}}</p>
+        <!-- Array loop -->
+        <ul>
+            <li v-for="(ingredient, index) in ingredients" :key="ingredient">
+                {{ingredient}} {{index}}
+            </li>
+        </ul>
+        <button @click="ingredients.push('milk')">Add New</button>
+        <button @click="ingredients.pop()">Delete Last</button>
+
+        <template v-for="(ingredient, index) in ingredients">
+            <h4>{{ingredient}}</h4>
+            <p>{{index}}</p>
+        </template>
+
+        <hr>
+
+        <!-- Object loop -->
+        <ul>
+            <li v-for="person in persons">{{person.name}} {{person.age}}</li>
+        </ul>
+
+        <ul>
+            <li v-for="person in persons">
+                <div v-for="(value, key, index) in person">
+                    {{value}}: {{key}} ({{index}})
+                </div>
+            </li>
+        </ul>
+
+        <!-- Index loop   -->
+        <ul>
+            <li v-for="n in 3">{{n}}</li>
+        </ul>
+    </div>
+    <script>
+        const p = 'paragraph'
+        const vm = new Vue({
+            el: '#app',
+
+            data: {
+                p: p,
+                title: 'New title',
+                ingredients: ['meat', 'fruit', 'cookies'],
+                persons: [
+                    { name: 'Max', age: 25, color: 'red' },
+                    { name: 'Anna', age: 32, color: 'blue' },
+                ]
+            }
+        });
+        // console.log(vm.$data.title)
+        console.log(vm)
+
+    </script>
+</body>
+
+</html>

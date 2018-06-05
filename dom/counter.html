@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VueApp</title>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{name + ' '+(age*3)}}</p>
+        <p>{{randomNumber()}}</p>
+        <div>
+            <img v-bind:src="link" style="width:100px;height:100px" alt="">
+        </div>
+        <div>
+            <input type="text" v-bind:value="name">
+        </div>
+        <div>
+            <button v-on:click="counterInc">Click me</button>
+            <p>{{counter}}</p>
+            <p>{{result}}</p>
+        </div>
+    </div>
+
+    <!-- <script src="InputTargetValue.js"></script> -->
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                name: 'Arkadiro',
+                age: 33,
+                finishedLink: `<a href="http://stressmarketing.com">StressMarketing!</a>`,
+                link: `http://stressmarketing.com/wp-content/themes/stressmarketing/img/laptop.png`,
+                counter: '0',
+                result:''
+            },
+            methods: {
+                changeTitle: function (event) {
+                    this.title = event.target.value;
+                },
+                sayHello: function () {
+                    this.title = `hello!`;
+                    return this.title;
+                },
+                randomNumber: function () {
+                    let numb = Math.floor(Math.random() * 2)
+                    return numb;
+                },
+                counterInc: function () {
+                    return this.counter++
+                }
+
+            }
+        });
+    </script>
+</body>
+
+</html>

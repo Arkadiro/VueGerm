@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VueApp</title>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <button v-on:click="counterInc(2, $event)">Click me</button>
+            <p>{{counter}}</p>
+            <p v-on:mousemove="updateCoord">
+                Coordinates: {{x}} / {{y}}
+                - <span v-on:mousemove.stop="">Dead Spot</span>
+            </p>
+            <input type="text" v-bind:value="value" v-on:keyup.enter="consoleMe($event)">
+        </div>
+    </div>
+
+    <!-- <script src="InputTargetValue.js"></script> -->
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                value: '',
+                counter: 0,
+                x: 0,
+                y: 0,
+            },
+            methods: {
+                counterInc: function (step, event) {
+                    console.log(event)
+                   return this.counter+=step;
+                },
+                updateCoord: function (event){
+                    this.x = event.clientX;
+                    this.y = event.clientY;
+                    console.log(event.target)
+                },
+                dummy: function(event){
+                    event.stopPropagation();
+                },
+                consoleMe: function(e){
+                    this.value = e.target.value;
+                    console.log(this.value);
+                }     
+
+            }
+        });
+    </script>
+</body>
+
+</html>

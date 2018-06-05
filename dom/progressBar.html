@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .progress{
+            width: 10px;
+            height: 10px;
+            background: fuchsia;
+        }
+        .content{
+            width:70%; 
+            margin: auto; 
+            text-align:center
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="start">Start</button>
+        <div class="content">
+            <span>Progress bar with interval</span>
+            <div class="progress" :style="progress"></div>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                pwidth: 0,
+            },
+            computed:{
+                myStyle: function(){
+                    return{
+                        backgroundColor: this.color,
+                        width: this.width +'px'
+                    }
+                },
+                progress: function(){
+                    return{
+                        width: this.pwidth +'%'
+                    }
+                }                
+            },
+            methods:{
+                start: function(){
+                    this.pSetInterval();            
+                },
+                pSetInterval: function(){
+                    vm = this;
+                    setInterval(function(){
+                        if(vm.pwidth <100)
+                        return vm.pwidth +=1; 
+                        else return vm.pwidth = 0
+                        
+                    }, 20)
+                }
+            }
+
+        });
+    </script>
+</body>
+
+</html>

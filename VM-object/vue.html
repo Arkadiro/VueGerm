@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<style>
+    .block{
+        display: inline-block;
+        width:30%;
+    }
+</style>
+<body>
+
+    <div id="app1" class="block">
+        <h2 ref="heading">{{title}}</h2>
+        <input type="text" v-model="name">
+        <p>{{name}} {{age}}</p>
+        <button @click="show" ref="myButton">Show me paragraph</button>
+        <p v-if="showParagraph">This is not always visible</p>
+    </div>
+
+    <div id="app2" class="block">
+        <p>{{name}}</p>
+        <hello></hello>
+    </div>
+
+    <div id="app3" class="block">
+        <hello></hello>
+    </div>
+
+    <script>
+        const age = 32
+
+        Vue.component('hello',{
+            template:`<h1>Hello!</h1>`
+        });
+
+        const app1 = new Vue({
+            el:'#app1',
+            data:{
+                title: 'VueApp',
+                name: 'Arkadiy',
+                age: age,
+                showParagraph: false
+            },
+            methods:{
+                show: function(){    
+                    //this.updateTitle('Vue instance Updated');              
+                    this.showParagraph = !this.showParagraph;    
+                    if(this.showParagraph){
+                        this.$refs.myButton.innerText = 'Hide paragraph'
+                    } else { this.$refs.myButton.innerText ='Show me paragraph'}
+                    
+                },
+                updateTitle: function(title){
+                    this.title = title;
+                }
+            }
+        });
+
+        const app2 = new Vue({
+            el:'#app2',
+            data:{
+                name: 'Masha'
+            }
+        });
+
+        const app3 = new Vue({
+            el:'#app3',
+            //template:'<h1>Hello!</h1>'  //deletes parent div
+        });
+        
+
+        //app3.$mount('#app3')
+        // app3.$mount();
+        // document.getElementById('app3').appendChild(app3.$el);
+
+
+
+
+        //Be aware of shanging contant this way 
+        //app1.$refs.heading.innerText = 'something else';
+
+        //VM $mount
+        //app1.$mount('#app1');
+
+        setTimeout(function(){
+            app1.title = 'changed by timer';
+        }, 2000)
+
+        // $data
+        //console.log(app1.$data.name)
+
+        //$ref
+        //console.log(app1.$refs.myButton)
+    </script>
+    
+</body>
+</html>
